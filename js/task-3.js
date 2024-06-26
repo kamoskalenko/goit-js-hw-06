@@ -1,16 +1,36 @@
-function filterArray(numbers, value) {
-    const newArray = [];
-   
-    for (let number of numbers) {
-       if (number > value) {
-            newArray.push(number);
-        }
-    }
-    return newArray;
-}
-console.log(filterArray([1, 2, 3, 4, 5], 3)); // [4, 5]
-console.log(filterArray([1, 2, 3, 4, 5], 4)); // [5]
-console.log(filterArray([1, 2, 3, 4, 5], 5)); // []
-console.log(filterArray([12, 24, 8, 41, 76], 38)); // [41, 76]
-console.log(filterArray([12, 24, 8, 41, 76], 20)); // [24, 41, 76]
+class StringBuilder {
+  #value;
 
+  constructor(initialValue) {
+    this.#value = initialValue;
+  }
+
+  getValue() {
+    return this.#value;
+  }
+  //— повертає поточне значення приватної властивості value.
+
+  padEnd(str) {
+    return (this.#value = this.#value + str);
+  }
+  //— отримує параметр str(рядок) і додає його в кінець значення приватної властивості value об'єкта, який викликає цей метод.
+
+  padStart(str) {
+    return (this.#value = str + this.#value);
+  }
+  //— отримує параметр str(рядок) і додає його на початок значення приватної властивості value об'єкта, який викликає цей метод.
+
+  padBoth(str) {
+    return (this.#value = str + this.#value + str);
+  }
+  //— отримує параметр str(рядок) і додає його на початок і в кінець значення приватної властивості value об'єкта, який викликає цей метод.
+}
+
+const builder = new StringBuilder('.');
+console.log(builder.getValue()); // "."
+builder.padStart('^');
+console.log(builder.getValue()); // "^."
+builder.padEnd('^');
+console.log(builder.getValue()); // "^.^"
+builder.padBoth('=');
+console.log(builder.getValue()); // "=^.^="
